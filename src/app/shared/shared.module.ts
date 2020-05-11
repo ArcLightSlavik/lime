@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AddExpenseComponent } from './components/add-expense/add-expense.component';
@@ -8,7 +9,8 @@ import { AddExpenseComponent } from './components/add-expense/add-expense.compon
   declarations: [AddExpenseComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     AddExpenseComponent

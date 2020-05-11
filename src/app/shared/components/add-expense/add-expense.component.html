@@ -8,5 +8,23 @@
 </ion-header>
 
 <ion-content>
-  Account content
+  <form [formGroup]="addExpenseForm">
+    <ion-item>
+      <ion-input placeholder="Enter Amount" type="text" formControlName="amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Enter Description" type="text" formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select Type</ion-label>
+      <ion-select okText="Okay" cancelText="Cancel" formControlName="type" interface="popover">
+        <ion-select-option value="brown">Brown</ion-select-option>
+        <ion-select-option value="blonde">Blonde</ion-select-option>
+        <ion-select-option value="black">Black</ion-select-option>
+        <ion-select-option value="red">Red</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button color="primary" expand="block">Add</ion-button>
+    <ion-button color="primary" expand="block">Cancel</ion-button>
+  </form>
 </ion-content>
