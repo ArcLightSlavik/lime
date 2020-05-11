@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular'
 
 import { DashboardComponent } from './dashboard.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { DashboardComponent } from './dashboard.component';
   imports: [
     CommonModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild([{path: '', component: DashboardComponent}])
   ]
 })
