@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { ActionService } from 'src/app/services/action/action.service';
+import { DatetimeService } from 'src/app/services/datetime/datetime.service';
 
 @Component({
   selector: 'app-add-expense',
@@ -15,9 +17,21 @@ export class AddExpenseComponent implements OnInit {
     type: new FormControl('')
   })
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private actionService: ActionService, private dateTimeService: DatetimeService) {
 
-  ngOnInit() { }
+  }
+
+  ngOnInit() {
+    console.log(this.addExpenseForm.value);
+  }
+
+  initCreateExpense(): void {
+    const expense = this.addExpenseForm.value;
+    expense.createdOn = this.dateTimeService.getCurrentDateTime();
+    this.actionService.createExpense(expense).then(() => {
+      this.dismissModal();
+    }).catch((error) => console.log(error));
+  }
 
   dismissModal(): void {
     this.modalController.dismiss().then().catch();
