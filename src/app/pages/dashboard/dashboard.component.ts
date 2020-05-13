@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     subscription: SubscriptionLike;
 
     constructor(private modalController: ModalController, private dataService: DataService, private actionService: ActionService) {
-        this.expenses = [];
         this.actionService.getTodayExpenseFromLocal().then((value => this.expenses = value));
     }
 
@@ -26,6 +25,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.subscription = this.dataService.getExpensesSubscription()
             .subscribe({
                 next: (expense) => {
+                    if (!this.expenses) {
+                        this.expenses = [];
+                    }
                     if (expense != null) {
                         this.expenses.push(expense);
                     }
