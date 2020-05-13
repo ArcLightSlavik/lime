@@ -27,7 +27,7 @@ export class AddExpenseComponent implements OnInit {
 
     initCreateExpense(): void {
         const expense = this.addExpenseForm.value;
-        expense.createdOn = this.dateTimeService.getCurrentDateTime();
+        expense.createOn = this.dateTimeService.getCurrentDateTime();
         this.actionService.createExpense(expense).then(() => {
             this.dismissModal();
         }).catch((error) => console.log(error));
