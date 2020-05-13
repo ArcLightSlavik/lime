@@ -1,30 +1,31 @@
-import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import {Injectable} from '@angular/core';
+import {Plugins} from '@capacitor/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class StorageService {
 
-  constructor() { }
+    constructor() {
+    }
 
-  async saveToLocalStorage(key: string, value: any) {
-    await Plugins.Storage.set({
-      key,
-      value: JSON.stringify(value)
-    });
-  }
+    async saveToLocalStorage(key: string, value: any) {
+        await Plugins.Storage.set({
+            key,
+            value: JSON.stringify(value),
+        });
+    }
 
-  async getFromLocalStorage(key: string): Promise<any> {
-    const ret = await Plugins.Storage.get({ key });
-    return JSON.parse(ret.value);
-  }
+    async getFromLocalStorage(key: string): Promise<any> {
+        const ret = await Plugins.Storage.get({key});
+        return JSON.parse(ret.value);
+    }
 
-  async removeFromLocalStorage(key: string): Promise<void> {
-    return await Plugins.Storage.remove({ key });
-  }
+    async removeFromLocalStorage(key: string): Promise<void> {
+        return await Plugins.Storage.remove({key});
+    }
 
-  async clearLocalStorage(): Promise<void> {
-    return await Plugins.Storage.clear();
-  }
+    async clearLocalStorage(): Promise<void> {
+        return await Plugins.Storage.clear();
+    }
 }

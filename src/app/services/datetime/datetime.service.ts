@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DatetimeService {
 
-  constructor() { }
+    constructor() {
+    }
 
-  getCurrentDateTime(): Date {
-    return moment().toDate();
-  }
+    getCurrentDateTime(): Date {
+        return moment().toDate();
+    }
 }

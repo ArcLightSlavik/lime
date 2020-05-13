@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { DataService } from '../data/data.service';
-import { ExpenseInterface } from '../../interface/expenseInterface';
+import {Injectable} from '@angular/core';
+import {DataService} from '../data/data.service';
+import {ExpenseInterface} from '../../interface/expenseInterface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ActionService {
 
-  constructor(private dataService: DataService) {
-  }
+    constructor(private dataService: DataService) {
+    }
 
-  async createExpense(expense: ExpenseInterface): Promise<void> {
-    return this.dataService.setExpenses(expense);
-  }
+    async createExpense(expense: ExpenseInterface): Promise<void> {
+        return this.dataService.setExpenses(expense);
+    }
 }
