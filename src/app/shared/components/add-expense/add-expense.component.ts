@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
 import {ActionService} from '../../../services/action/action.service';
-import {DatetimeService} from '../../../services/datetime/datetime.service';
+import {DateTimeService} from '../../../services/datetime/date-time.service';
 
 @Component({
     selector: 'app-add-expense',
@@ -17,12 +17,11 @@ export class AddExpenseComponent implements OnInit {
         type: new FormControl('', Validators.required),
     });
 
-    constructor(private modalController: ModalController, private actionService: ActionService, private dateTimeService: DatetimeService) {
+    constructor(private modalController: ModalController, private actionService: ActionService, private dateTimeService: DateTimeService) {
 
     }
 
     ngOnInit() {
-        console.log(this.addExpenseForm.value);
     }
 
     initCreateExpense(): void {

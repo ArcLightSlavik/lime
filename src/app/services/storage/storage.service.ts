@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Plugins} from '@capacitor/core';
 
-import {DatetimeService} from '../datetime/datetime.service';
+import {DateTimeService} from '../datetime/date-time.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 
 
@@ -10,7 +10,7 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
 })
 export class StorageService {
 
-    constructor(private dateTimeService: DatetimeService) {
+    constructor(private dateTimeService: DateTimeService) {
     }
 
     async saveExpenseToLocal(expense: ExpenseInterface): Promise<void> {
@@ -31,7 +31,7 @@ export class StorageService {
     }
 
     async getExpensesFromLocal(date?: Date): Promise<ExpenseInterface[]> {
-        const key = date ? this.dateTimeService.getDateTimeString(date) : this.dateTimeService.getDateTimeString();
+        const key = this.dateTimeService.getDateTimeString(date);
         return await this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
             return expenses;
         });

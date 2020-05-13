@@ -4,7 +4,7 @@ import * as moment from 'moment';
 @Injectable({
     providedIn: 'root'
 })
-export class DatetimeService {
+export class DateTimeService {
 
     constructor() {
     }
