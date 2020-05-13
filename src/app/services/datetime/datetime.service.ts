@@ -12,4 +12,8 @@ export class DatetimeService {
     getCurrentDateTime(): Date {
         return moment().toDate();
     }
+
+    getDateTimeString(date?: Date): string {
+        return date ? moment(date).format('L') : moment().format('L');
+    }
 }

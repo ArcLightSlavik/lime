@@ -1,9 +1,11 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {SubscriptionLike} from 'rxjs';
-import {AddExpenseComponent} from 'src/app/shared/components/add-expense/add-expense.component';
-import {DataService} from 'src/app/services/data/data.service';
-import {ExpenseInterface} from 'src/app/interface/expenseInterface';
+
+import {DataService} from '../../services/data/data.service';
+import {ActionService} from '../../services/action/action.service';
+import {ExpenseInterface} from '../../interface/expenseInterface';
+import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,8 +17,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     expenses: ExpenseInterface[];
     subscription: SubscriptionLike;
 
-    constructor(private modalController: ModalController, private dataService: DataService) {
+    constructor(private modalController: ModalController, private dataService: DataService, private actionService: ActionService) {
         this.expenses = [];
+        this.actionService.getTodayExpenseFromLocal().then((value => this.expenses = value));
     }
 
     ngOnInit() {

@@ -1,15 +1,43 @@
 import {Injectable} from '@angular/core';
 import {Plugins} from '@capacitor/core';
 
+import {DatetimeService} from '../datetime/datetime.service';
+import {ExpenseInterface} from '../../interface/expenseInterface';
+
+
 @Injectable({
     providedIn: 'root'
 })
 export class StorageService {
 
-    constructor() {
+    constructor(private dateTimeService: DatetimeService) {
     }
 
-    async saveToLocalStorage(key: string, value: any) {
+    async saveExpenseToLocal(expense: ExpenseInterface): Promise<void> {
+        const key = this.dateTimeService.getDateTimeString();
+        let existingExpenses: ExpenseInterface[] = [];
+        this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
+            if (expenses == null) {
+                existingExpenses.push(expense);
+            } else {
+                existingExpenses = expenses;
+                existingExpenses.push(expense);
+            }
+        }).then(() => {
+            this.saveToLocalStorage(key, existingExpenses);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    async getExpensesFromLocal(date?: Date): Promise<ExpenseInterface[]> {
+        const key = date ? this.dateTimeService.getDateTimeString(date) : this.dateTimeService.getDateTimeString();
+        return await this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
+            return expenses;
+        });
+    }
+
+    async saveToLocalStorage(key: string, value: ExpenseInterface[]) {
         await Plugins.Storage.set({
             key,
             value: JSON.stringify(value),

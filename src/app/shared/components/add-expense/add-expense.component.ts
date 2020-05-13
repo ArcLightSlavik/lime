@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
-import {ActionService} from 'src/app/services/action/action.service';
-import {DatetimeService} from 'src/app/services/datetime/datetime.service';
+import {ActionService} from '../../../services/action/action.service';
+import {DatetimeService} from '../../../services/datetime/datetime.service';
 
 @Component({
     selector: 'app-add-expense',
