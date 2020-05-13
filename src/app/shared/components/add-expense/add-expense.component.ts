@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
 import {ActionService} from 'src/app/services/action/action.service';
 import {DatetimeService} from 'src/app/services/datetime/datetime.service';
@@ -12,9 +12,9 @@ import {DatetimeService} from 'src/app/services/datetime/datetime.service';
 export class AddExpenseComponent implements OnInit {
 
     addExpenseForm = new FormGroup({
-        amount: new FormControl(''),
+        amount: new FormControl('', Validators.required),
         description: new FormControl(''),
-        type: new FormControl(''),
+        type: new FormControl('', Validators.required),
     });
 
     constructor(private modalController: ModalController, private actionService: ActionService, private dateTimeService: DatetimeService) {
