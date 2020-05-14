@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Plugins} from '@capacitor/core';
 
-import {DateTimeService} from '../datetime/date-time.service';
+import {DatetimeService} from '../datetime/datetime.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 
 
@@ -10,34 +10,32 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
 })
 export class StorageService {
 
-    constructor(private dateTimeService: DateTimeService) {
+    constructor(private dateTimeService: DatetimeService) {
     }
 
     async saveExpenseToLocal(expense: ExpenseInterface): Promise<void> {
-        const key = this.dateTimeService.getDateTimeString();
-        let existingExpenses: ExpenseInterface[] = [];
+        const key = this.dateTimeService.getDateTimeISOWithFormat(expense.createdOn);
+        let todayExpenses: ExpenseInterface[] = [];
         this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
             if (expenses == null) {
-                existingExpenses.push(expense);
+                todayExpenses.push(expense);
             } else {
-                existingExpenses = expenses;
-                existingExpenses.push(expense);
+                todayExpenses = expenses;
+                todayExpenses.push(expense);
             }
         }).then(() => {
-            this.saveToLocalStorage(key, existingExpenses);
-        }).catch((err) => {
-            console.log(err);
-        });
+            this.saveToLocalStorage(key, todayExpenses);
+        }).catch((err) => console.log(err));
     }
 
     async getExpensesFromLocal(date?: Date): Promise<ExpenseInterface[]> {
-        const key = this.dateTimeService.getDateTimeString(date);
+        const key = this.dateTimeService.getDateTimeISOWithFormat(date);
         return await this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
             return expenses;
         });
     }
 
-    async saveToLocalStorage(key: string, value: ExpenseInterface[]) {
+    async saveToLocalStorage(key: string, value: any): Promise<void> {
         await Plugins.Storage.set({
             key,
             value: JSON.stringify(value),

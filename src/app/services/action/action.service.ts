@@ -8,8 +8,10 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
     providedIn: 'root'
 })
 export class ActionService {
-
-    constructor(private dataService: DataService, private storageService: StorageService) {
+    constructor(
+        private dataService: DataService,
+        private storageService: StorageService
+    ) {
     }
 
     async createExpense(expense: ExpenseInterface): Promise<void> {
@@ -17,7 +19,7 @@ export class ActionService {
         return this.dataService.setExpenses(expense);
     }
 
-    async getTodayExpenseFromLocal(): Promise<ExpenseInterface[]> {
+    async getTodayExpensesFromLocal(): Promise<ExpenseInterface[]> {
         return await this.storageService.getExpensesFromLocal().then((expenses: ExpenseInterface[]) => {
             return expenses;
         });

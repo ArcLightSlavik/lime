@@ -14,7 +14,7 @@ describe('StorageService', () => {
         storageService = TestBed.get(StorageService);
     });
 
-    it('should be created', () => {
+    it('StorageService should be created', () => {
         const service: StorageService = TestBed.get(StorageService);
         expect(service).toBeTruthy();
     });
@@ -22,8 +22,8 @@ describe('StorageService', () => {
     it('saveToLocalStorage() | getFromLocalStorage()', (doneFn) => {
         const object = {test: 'test'};
         storageService.saveToLocalStorage('test', object);
-        storageService.getFromLocalStorage('test').then((value) => {
-            expect(value).toEqual(object);
+        storageService.getFromLocalStorage('test').then((val) => {
+            expect(val).toEqual(object);
             doneFn();
         });
     });
@@ -31,8 +31,8 @@ describe('StorageService', () => {
     it('removeFromLocalStorage() | getFromLocalStorage()', (doneFn) => {
         const object = {test: 'test'};
         storageService.saveToLocalStorage('test', object);
-        storageService.removeFromLocalStorage('test').then((value) => {
-            expect(value).toEqual(undefined);
+        storageService.removeFromLocalStorage('test').then((val) => {
+            expect(val).toEqual(undefined);
             doneFn();
         });
     });
@@ -40,8 +40,8 @@ describe('StorageService', () => {
     it('clearLocalStorage() | getFromLocalStorage()', (doneFn) => {
         const object = {test: 'test'};
         storageService.saveToLocalStorage('test', object);
-        storageService.clearLocalStorage().then((value) => {
-            expect(value).toEqual(undefined);
+        storageService.clearLocalStorage().then((val) => {
+            expect(val).toEqual(undefined);
             doneFn();
         });
     });

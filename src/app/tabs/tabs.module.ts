@@ -1,10 +1,11 @@
-import {IonicModule} from '@ionic/angular';
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
-import {TabsPageRoutingModule} from './tabs-routing.module';
+import {IonicModule} from '@ionic/angular';
+
 import {TabsPage} from './tabs.page';
+import {TabsPageRoutingModule} from './tabs-routing.module';
 
 import {BudgetModule} from '../pages/budget/budget.module';
 import {AccountModule} from '../pages/account/account.module';
@@ -17,10 +18,10 @@ import {DashboardModule} from '../pages/dashboard/dashboard.module';
         CommonModule,
         FormsModule,
         TabsPageRoutingModule,
-        BudgetModule,
+        DashboardModule,
         AccountModule,
         ActivityModule,
-        DashboardModule
+        BudgetModule,
     ],
     declarations: [TabsPage]
 })

@@ -7,13 +7,17 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
-import {AppRoutingModule} from './app-routing.module';
+import {DataService} from './services/data/data.service';
 import {AppComponent} from './app.component';
+import {ActionService} from './services/action/action.service';
+import {AppRoutingModule} from './app-routing.module';
+
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule,
+    imports: [
+        BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         ReactiveFormsModule
@@ -21,7 +25,9 @@ import {AppComponent} from './app.component';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        DataService,
+        ActionService
     ],
     bootstrap: [AppComponent]
 })
