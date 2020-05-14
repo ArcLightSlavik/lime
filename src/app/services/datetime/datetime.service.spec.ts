@@ -1,12 +1,12 @@
 import {TestBed} from '@angular/core/testing';
 
-import {DateTimeService} from './date-time.service';
+import {DatetimeService} from './datetime.service';
 
 describe('DatetimeService', () => {
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {
-        const service: DateTimeService = TestBed.get(DateTimeService);
+        const service: DatetimeService = TestBed.get(DatetimeService);
         expect(service).toBeTruthy();
     });
 });
