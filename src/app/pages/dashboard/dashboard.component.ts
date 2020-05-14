@@ -1,9 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SubscriptionLike} from 'rxjs';
 
-import {DataService} from '../../services/data/data.service';
+import {ModalController} from '@ionic/angular';
+
 import {ActionService} from '../../services/action/action.service';
+import {DataService} from '../../services/data/data.service';
+import {DatetimeService} from '../../services/datetime/datetime.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
 
@@ -16,12 +18,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     expenses: ExpenseInterface[];
     subscription: SubscriptionLike;
+    todayDate: Date;
+    installDate: Date;
+    selectedDate: Date;
 
-    constructor(private modalController: ModalController, private dataService: DataService, private actionService: ActionService) {
-        this.actionService.getTodayExpenseFromLocal().then((value => this.expenses = value));
+    constructor(
+        private modalController: ModalController,
+        private dataService: DataService,
+        private actionsService: ActionService,
+        private datetimeService: DatetimeService,
+    ) {
+        this.actionsService.getTodayExpensesFromLocal().then((value => this.expenses = value));
+        this.todayDate = this.datetimeService.todayDate;
+        this.installDate = this.datetimeService.installDate;
     }
 
     ngOnInit() {
+        this.selectedDate = this.datetimeService.getCurrentDateTime();
         this.subscription = this.dataService.getExpensesSubscription()
             .subscribe({
                 next: (expense) => {
@@ -32,15 +45,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
                         this.expenses.push(expense);
                     }
                 },
-                error: () => {
+                error: (err) => {
+                    console.log(err);
                 },
                 complete: () => {
                 }
             });
-    }
-
-    ngOnDestroy(): void {
-
     }
 
     async presentModal() {
@@ -48,5 +58,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
             component: AddExpenseComponent,
         });
         return await modal.present();
+    }
+
+    ngOnDestroy(): void {
+    }
+
+    changeSelectedDate(value: string): void {
+        this.datetimeService.selectedDate = this.datetimeService.createDateFromString(value);
+        this.selectedDate = this.datetimeService.createDateFromString(value);
+    }
+
+    setCurrentToTodayDate(): void {
+        this.todayDate = this.datetimeService.getCurrentDateTime();
+        this.selectedDate = this.datetimeService.getCurrentDateTime();
     }
 }

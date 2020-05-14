@@ -1,28 +1,26 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {ExpenseInterface} from 'src/app/interface/expenseInterface';
+import {ExpenseInterface} from '../../interface/expenseInterface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
-
-    private readonly expense: BehaviorSubject<ExpenseInterface>;
-
+    private readonly _expense: BehaviorSubject<ExpenseInterface>;
 
     constructor() {
-        this.expense = new BehaviorSubject<ExpenseInterface>(null);
+        this._expense = new BehaviorSubject<ExpenseInterface>(null);
     }
 
     async getExpenses(): Promise<ExpenseInterface> {
-        return this.expense.getValue();
+        return this._expense.getValue();
     }
 
     async setExpenses(expenses: ExpenseInterface): Promise<void> {
-        return this.expense.next(expenses);
+        return this._expense.next(expenses);
     }
 
     getExpensesSubscription(): BehaviorSubject<ExpenseInterface> {
-        return this.expense;
+        return this._expense;
     }
 }
