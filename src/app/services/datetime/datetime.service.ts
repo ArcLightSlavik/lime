@@ -6,7 +6,6 @@ import * as moment from 'moment';
 })
 export class DatetimeService {
     private _installDate: Date;
-    private _todayDate: Date;
     private _selectedDate: Date;
 
     constructor() {
@@ -30,14 +29,6 @@ export class DatetimeService {
 
     set installDate(value: Date) {
         this._installDate = value;
-    }
-
-    get todayDate(): Date {
-        return this._todayDate;
-    }
-
-    set todayDate(value: Date) {
-        this._todayDate = value;
     }
 
     get selectedDate(): Date {

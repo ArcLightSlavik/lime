@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     expenses: ExpenseInterface[];
     subscription: SubscriptionLike;
-    todayDate: Date;
     installDate: Date;
     selectedDate: Date;
 
@@ -29,7 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private datetimeService: DatetimeService,
     ) {
         this.actionsService.getTodayExpensesFromLocal().then((value => this.expenses = value));
-        this.todayDate = this.datetimeService.todayDate;
+        this.selectedDate = this.datetimeService.selectedDate;
         this.installDate = this.datetimeService.installDate;
     }
 
@@ -69,7 +68,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     setCurrentToTodayDate(): void {
-        this.todayDate = this.datetimeService.getCurrentDateTime();
         this.selectedDate = this.datetimeService.getCurrentDateTime();
     }
 }
