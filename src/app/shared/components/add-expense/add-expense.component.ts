@@ -5,6 +5,7 @@ import {ModalController} from '@ionic/angular';
 
 import {ActionService} from '../../../services/action/action.service';
 import {DatetimeService} from '../../../services/datetime/datetime.service';
+import {ExpenseTypes} from '../../../constants/constants';
 
 @Component({
     selector: 'app-add-expense',
@@ -12,6 +13,7 @@ import {DatetimeService} from '../../../services/datetime/datetime.service';
     styleUrls: ['./add-expense.component.scss'],
 })
 export class AddExpenseComponent implements OnInit {
+    expenseTypes: any;
     addExpenseForm = new FormGroup({
         amount: new FormControl('', Validators.required),
         description: new FormControl(''),
@@ -23,6 +25,7 @@ export class AddExpenseComponent implements OnInit {
         private actionService: ActionService,
         private dateTimeService: DatetimeService
     ) {
+        this.expenseTypes = ExpenseTypes;
     }
 
     ngOnInit() {

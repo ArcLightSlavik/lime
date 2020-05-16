@@ -3,8 +3,9 @@ import {SubscriptionLike} from 'rxjs';
 
 import {ModalController} from '@ionic/angular';
 
-import {ActionService} from '../../services/action/action.service';
 import {DataService} from '../../services/data/data.service';
+import {ExpenseTypes} from '../../constants/constants';
+import {ActionService} from '../../services/action/action.service';
 import {DatetimeService} from '../../services/datetime/datetime.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     selectedDate: Date;
     todayDate: Date;
     dateSubscription: SubscriptionLike;
+    expenseTypes: any;
 
     constructor(
         private modalController: ModalController,
@@ -32,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.actionsService.getTodayExpensesFromLocal().then((expenses => this.expenses = expenses));
         this.installDate = this.datetimeService.installDate;
         this.todayDate = this.datetimeService.getCurrentDateTime();
+        this.expenseTypes = ExpenseTypes;
     }
 
     ngOnInit() {

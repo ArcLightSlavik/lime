@@ -3,9 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
 import {DataService} from './services/data/data.service';
 import {AppComponent} from './app.component';

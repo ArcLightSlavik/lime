@@ -25,7 +25,12 @@
                         ></ion-datetime>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button expand="full">Category</ion-button>
+                        <ion-button expand="full" (click)="selectedValue.open()">Category</ion-button>
+                        <ion-item hidden>
+                            <ion-select interface="popover" #selectedValue>
+                                <ion-select-option [value]="type.value" *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
                     </ion-col>
                     <ion-col size="3">
                         <ion-button expand="full">Filter</ion-button>
@@ -37,7 +42,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let expense of expenses">
+    <ion-card *ngFor="let expense of expenses | category: selectedValue.value">
         <ion-toolbar color="primary">
             <ion-buttons slot="end">
                 <ion-button>

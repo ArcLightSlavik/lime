@@ -4,11 +4,15 @@ import {RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {DashboardComponent} from './dashboard.component';
+import {CategoryPipe} from '../../pipes/category.pipe';
 import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
-    declarations: [DashboardComponent],
+    declarations: [
+        DashboardComponent,
+        CategoryPipe
+    ],
     imports: [
         CommonModule,
         IonicModule,
