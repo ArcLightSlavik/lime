@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     subscription: SubscriptionLike;
     installDate: Date;
     selectedDate: Date;
+    todayDate: Date;
     dateSubscription: SubscriptionLike;
 
     constructor(
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ) {
         this.actionsService.getTodayExpensesFromLocal().then((expenses => this.expenses = expenses));
         this.installDate = this.datetimeService.installDate;
+        this.todayDate = this.datetimeService.getCurrentDateTime();
     }
 
     ngOnInit() {
