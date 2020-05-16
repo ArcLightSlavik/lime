@@ -15,16 +15,16 @@ export class StorageService {
 
     async saveExpenseToLocal(expense: ExpenseInterface): Promise<void> {
         const key = this.dateTimeService.getDateTimeISOWithFormat(expense.createdOn);
-        let todayExpenses: ExpenseInterface[] = [];
-        this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
+        let expenseList: ExpenseInterface[] = [];
+        return this.getFromLocalStorage(key).then((expenses: ExpenseInterface[]) => {
             if (expenses == null) {
-                todayExpenses.push(expense);
+                expenseList.push(expense);
             } else {
-                todayExpenses = expenses;
-                todayExpenses.push(expense);
+                expenseList = expenses;
+                expenseList.push(expense);
             }
         }).then(() => {
-            this.saveToLocalStorage(key, todayExpenses);
+            this.saveToLocalStorage(key, expenseList);
         }).catch((err) => console.log(err));
     }
 
