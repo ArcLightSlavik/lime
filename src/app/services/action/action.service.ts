@@ -15,8 +15,9 @@ export class ActionService {
     }
 
     async createExpense(expense: ExpenseInterface): Promise<void> {
-        await this.storageService.saveExpenseToLocal(expense);
-        return this.dataService.setExpenses(expense);
+        return await this.storageService.saveExpenseToLocal(expense).then(() => {
+            this.dataService.setExpenses(expense);
+        });
     }
 
     async getTodayExpensesFromLocal(): Promise<ExpenseInterface[]> {
