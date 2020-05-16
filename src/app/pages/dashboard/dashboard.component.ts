@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     subscription: SubscriptionLike;
     installDate: Date;
     selectedDate: Date;
+    dateSubscription: SubscriptionLike;
 
     constructor(
         private modalController: ModalController,
@@ -27,29 +28,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private actionsService: ActionService,
         private datetimeService: DatetimeService,
     ) {
-        this.actionsService.getTodayExpensesFromLocal().then((value => this.expenses = value));
-        this.selectedDate = this.datetimeService.selectedDate;
+        this.actionsService.getTodayExpensesFromLocal().then((expenses => this.expenses = expenses));
         this.installDate = this.datetimeService.installDate;
     }
 
     ngOnInit() {
-        this.selectedDate = this.datetimeService.getCurrentDateTime();
-        this.subscription = this.dataService.getExpensesSubscription()
-            .subscribe({
-                next: (expense) => {
-                    if (!this.expenses) {
-                        this.expenses = [];
-                    }
-                    if (expense != null) {
-                        this.expenses.push(expense);
-                    }
-                },
-                error: (err) => {
-                    console.log(err);
-                },
-                complete: () => {
+        this.dateSubscription = this.datetimeService.getSelectedDateSubscription().subscribe({
+            next: (date: Date) => {
+                this.selectedDate = date;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+            complete: () => {
+            }
+        });
+        this.subscription = this.dataService.getExpensesSubscription().subscribe({
+            next: (expense: ExpenseInterface[]) => {
+                if (expense != null) {
+                    this.expenses = expense;
+                } else {
+                    this.expenses = [];
                 }
-            });
+            },
+            error: (err) => {
+                console.log(err);
+            },
+            complete: () => {
+            }
+        });
     }
 
     async presentModal() {
@@ -63,11 +70,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     changeSelectedDate(value: string): void {
-        this.datetimeService.selectedDate = this.datetimeService.createDateFromString(value);
         this.selectedDate = this.datetimeService.createDateFromString(value);
+        this.datetimeService.setSelectedDate(value).then(() => {
+            this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+        });
     }
 
     setCurrentToTodayDate(): void {
-        this.selectedDate = this.datetimeService.getCurrentDateTime();
+        this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
+            this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+        });
     }
 }

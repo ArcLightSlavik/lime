@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Plugins} from '@capacitor/core';
 
+import {DataService} from '../data/data.service';
 import {DatetimeService} from '../datetime/datetime.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 
@@ -10,7 +11,10 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
 })
 export class StorageService {
 
-    constructor(private dateTimeService: DatetimeService) {
+    constructor(
+        private dateTimeService: DatetimeService,
+        private dataService: DataService
+    ) {
     }
 
     async saveExpenseToLocal(expense: ExpenseInterface): Promise<void> {
@@ -24,7 +28,9 @@ export class StorageService {
                 expenseList.push(expense);
             }
         }).then(() => {
-            this.saveToLocalStorage(key, expenseList);
+            this.saveToLocalStorage(key, expenseList).then(() => {
+                this.dataService.setExpenses(expenseList);
+            });
         }).catch((err) => console.log(err));
     }
 
@@ -36,7 +42,7 @@ export class StorageService {
     }
 
     async saveToLocalStorage(key: string, value: any): Promise<void> {
-        await Plugins.Storage.set({
+        return await Plugins.Storage.set({
             key,
             value: JSON.stringify(value),
         });

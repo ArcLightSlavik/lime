@@ -17,16 +17,17 @@
         <ion-footer>
             <ion-row>
                 <ion-col size="3">
-                    <ion-button expand="full" fill="clear" (click)="setCurrentToTodayDate()" >Today</ion-button>
+                    <ion-button expand="full" fill="clear" (click)="setCurrentToTodayDate()">Today</ion-button>
                 </ion-col>
                 <ion-col size="3">
                     <ion-item lines="none">
                         <ion-button color="primary">Date</ion-button>
                         <ion-datetime
-                                #selected
-                                (ionChange)="changeSelectedDate(selected.value)"
-                                min="2020"
-                                [max]="selectedDate.toISOString()"
+                            #selected
+                            [value]="selectedDate.toISOString()"
+                            (ionChange)="changeSelectedDate(selected.value)"
+                            min="2020"
+                            [max]="selectedDate.toISOString()"
                         ></ion-datetime>
                     </ion-item>
                 </ion-col>

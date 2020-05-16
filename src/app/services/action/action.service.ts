@@ -15,14 +15,18 @@ export class ActionService {
     }
 
     async createExpense(expense: ExpenseInterface): Promise<void> {
-        return await this.storageService.saveExpenseToLocal(expense).then(() => {
-            this.dataService.setExpenses(expense);
-        });
+        return await this.storageService.saveExpenseToLocal(expense).then().catch();
     }
 
     async getTodayExpensesFromLocal(): Promise<ExpenseInterface[]> {
         return await this.storageService.getExpensesFromLocal().then((expenses: ExpenseInterface[]) => {
             return expenses;
+        });
+    }
+
+    async emitExpensesByDateFromLocal(date: Date): Promise<void> {
+        return await this.storageService.getExpensesFromLocal(date).then((expenses: ExpenseInterface[]) => {
+            this.dataService.setExpenses(expenses);
         });
     }
 }

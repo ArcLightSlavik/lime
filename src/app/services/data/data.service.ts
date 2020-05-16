@@ -6,21 +6,21 @@ import {ExpenseInterface} from '../../interface/expenseInterface';
     providedIn: 'root'
 })
 export class DataService {
-    private readonly _expense: BehaviorSubject<ExpenseInterface>;
+    private readonly expenses: BehaviorSubject<ExpenseInterface[]>;
 
     constructor() {
-        this._expense = new BehaviorSubject<ExpenseInterface>(null);
+        this.expenses = new BehaviorSubject<ExpenseInterface[]>(null);
     }
 
-    async getExpenses(): Promise<ExpenseInterface> {
-        return this._expense.getValue();
+    async getExpenses(): Promise<ExpenseInterface[]> {
+        return this.expenses.getValue();
     }
 
-    async setExpenses(expenses: ExpenseInterface): Promise<void> {
-        return this._expense.next(expenses);
+    async setExpenses(expenses: ExpenseInterface[]): Promise<void> {
+        return this.expenses.next(expenses);
     }
 
-    getExpensesSubscription(): BehaviorSubject<ExpenseInterface> {
-        return this._expense;
+    getExpensesSubscription(): BehaviorSubject<ExpenseInterface[]> {
+        return this.expenses;
     }
 }
