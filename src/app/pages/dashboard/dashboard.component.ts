@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     todayDate: Date;
     dateSubscription: SubscriptionLike;
     expenseTypes: any;
+    totalSubscription: SubscriptionLike;
+    todayTotal: number;
 
     constructor(
         private modalController: ModalController,
@@ -31,13 +33,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private actionsService: ActionService,
         private datetimeService: DatetimeService,
     ) {
-        this.actionsService.getTodayExpensesFromLocal().then((expenses => this.expenses = expenses));
         this.installDate = this.datetimeService.installDate;
         this.todayDate = this.datetimeService.getCurrentDateTime();
         this.expenseTypes = ExpenseTypes;
+        this.todayTotal = null;
     }
 
     ngOnInit() {
+        this.totalSubscription = this.dataService.getTodayTotalExpensesSubscription().subscribe({
+            next: (total: number) => {
+                this.todayTotal = total;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+            complete: () => {
+            }
+        });
+
         this.dateSubscription = this.datetimeService.getSelectedDateSubscription().subscribe({
             next: (date: Date) => {
                 this.selectedDate = date;
