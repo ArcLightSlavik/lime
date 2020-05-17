@@ -16,16 +16,20 @@ import {AddExpenseComponent} from '../../shared/components/add-expense/add-expen
     styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-    expenses: ExpenseInterface[];
-    subscription: SubscriptionLike;
     installDate: Date;
     selectedDate: Date;
     todayDate: Date;
+
+    subscription: SubscriptionLike;
     dateSubscription: SubscriptionLike;
-    expenseTypes: any;
     totalSubscription: SubscriptionLike;
+
+    expenses: ExpenseInterface[];
+    expenseTypes: any;
     todayTotal: number;
+
+    filterByPrice: boolean;
+    filterByPriceUp: boolean;
 
     constructor(
         private modalController: ModalController,
@@ -99,6 +103,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
             this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
         });
+    }
+
+    priceFilter(): void {
+        this.expenses = this.expenses.sort((a, b) => {
+            if (a.amount > b.amount) {
+                return this.filterByPriceUp ? 1 : -1;
+            }
+            if (b.amount > a.amount) {
+                return this.filterByPriceUp ? -1 : 1;
+            }
+            return 0;
+        });
+        this.filterByPrice = true;
+        this.filterByPriceUp = !this.filterByPriceUp;
     }
 
     async presentFilterActionSheet() {

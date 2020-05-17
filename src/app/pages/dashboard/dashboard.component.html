@@ -33,7 +33,10 @@
                         </ion-item>
                     </ion-col>
                     <ion-col size="3">
-                        <ion-button expand="full" (click)="presentFilterActionSheet()">Filter</ion-button>
+                        <ion-button expand="full" (click)="priceFilter()">
+                            <ion-icon name="logo-usd"></ion-icon>
+                            <ion-icon *ngIf="filterByPrice" [name]="filterByPriceUp ? 'arrow-up': 'arrow-down'"></ion-icon>
+                        </ion-button>
                     </ion-col>
                 </ion-row>
             </ion-footer>
