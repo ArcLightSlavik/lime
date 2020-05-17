@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SubscriptionLike} from 'rxjs';
 
-import {ModalController} from '@ionic/angular';
+import {ActionSheetController, ModalController} from '@ionic/angular';
 
 import {DataService} from '../../services/data/data.service';
 import {ExpenseTypes} from '../../constants/constants';
@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private dataService: DataService,
         private actionsService: ActionService,
         private datetimeService: DatetimeService,
+        private actionSheetController: ActionSheetController,
     ) {
         this.installDate = this.datetimeService.installDate;
         this.todayDate = this.datetimeService.getCurrentDateTime();
@@ -98,5 +99,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
             this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
         });
+    }
+
+    async presentFilterActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Albums',
+            buttons: [
+                {
+                    text: 'Price',
+                    icon: 'logo-usd',
+                    handler: () => {
+                        console.log('Share clicked');
+                    }
+                }, {
+                    text: 'Recent',
+                    icon: 'cellular-outline',
+                    handler: () => {
+                        console.log('Play clicked');
+                    }
+                }, {
+                    text: 'Cancel',
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
+        });
+        await actionSheet.present();
     }
 }
