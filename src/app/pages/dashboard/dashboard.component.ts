@@ -5,7 +5,7 @@ import {ActionSheetController, ModalController} from '@ionic/angular';
 
 import {DataService} from '../../services/data/data.service';
 import {ExpenseTypes} from '../../constants/constants';
-import {ActionService} from '../../services/action/action.service';
+import {ExpenseService} from '../../services/storage/expense-storage.service';
 import {DatetimeService} from '../../services/datetime/datetime.service';
 import {ExpenseInterface} from '../../interface/expenseInterface';
 import {AddExpenseComponent} from '../../shared/components/add-expense/add-expense.component';
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(
         private modalController: ModalController,
         private dataService: DataService,
-        private actionsService: ActionService,
+        private expenseService: ExpenseService,
         private datetimeService: DatetimeService,
         private actionSheetController: ActionSheetController,
     ) {
@@ -95,13 +95,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     changeSelectedDate(value: string): void {
         this.selectedDate = this.datetimeService.createDateFromString(value);
         this.datetimeService.setSelectedDate(value).then(() => {
-            this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+            this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
         });
     }
 
     setCurrentToTodayDate(): void {
         this.datetimeService.setSelectedDate(this.datetimeService.getCurrentDateTime()).then(() => {
-            this.actionsService.emitExpensesByDateFromLocal(this.selectedDate);
+            this.expenseService.emitExpensesByDateFromLocal(this.selectedDate);
         });
     }
 
