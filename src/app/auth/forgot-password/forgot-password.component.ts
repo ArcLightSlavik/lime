@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,27 +6,16 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
     templateUrl: './forgot-password.component.html',
     styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
 
     private forgotPasswordForm: FormGroup = new FormGroup({
-        email: new FormControl('', Validators.email)
+        email: new FormControl('', [Validators.required, Validators.email])
     });
 
-    constructor(private router: Router) {
-    }
-
-    ngOnInit() {
+    constructor() {
     }
 
     submitForgotPasswordForm(): void {
         console.log('Password reset request');
-    }
-
-    navigateToLogin(): void {
-        this.router.navigateByUrl('auth/login');
-    }
-
-    navigateToRegister(): void {
-        this.router.navigateByUrl('auth/register');
     }
 }
