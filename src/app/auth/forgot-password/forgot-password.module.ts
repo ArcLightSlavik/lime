@@ -5,6 +5,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {ForgotPasswordComponent} from './forgot-password.component';
 import {ForgotPasswordRoutingModule} from './forgot-password-routing.module';
+import {LimeFormsModule} from '../../utils/modules/lime-forms.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {ForgotPasswordRoutingModule} from './forgot-password-routing.module';
     imports: [
         CommonModule,
         IonicModule,
+        LimeFormsModule,
         ForgotPasswordRoutingModule
     ]
 })
