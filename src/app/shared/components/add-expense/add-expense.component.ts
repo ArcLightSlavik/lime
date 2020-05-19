@@ -3,9 +3,9 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 import {ModalController} from '@ionic/angular';
 
-import {ActionService} from '../../../services/action/action.service';
-import {DatetimeService} from '../../../services/datetime/datetime.service';
 import {ExpenseTypes} from '../../../constants/constants';
+import {ExpenseService} from '../../../services/storage/expense-storage.service';
+import {DatetimeService} from '../../../services/datetime/datetime.service';
 import {ExpenseInterface} from '../../../interface/expenseInterface';
 
 @Component({
@@ -23,7 +23,7 @@ export class AddExpenseComponent implements OnInit {
 
     constructor(
         private modalController: ModalController,
-        private actionService: ActionService,
+        private expenseService: ExpenseService,
         private dateTimeService: DatetimeService
     ) {
         this.expenseTypes = ExpenseTypes;
@@ -40,7 +40,7 @@ export class AddExpenseComponent implements OnInit {
                 expense.createdOn = date;
             }
         }).then(() => {
-            this.actionService.createExpense(expense).then(() => {
+            this.expenseService.createExpense(expense).then(() => {
                 this.dismissModal();
             }).catch((err) => console.log(err));
         });

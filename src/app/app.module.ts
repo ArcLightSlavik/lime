@@ -9,7 +9,6 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
 import {DataService} from './services/data/data.service';
 import {AppComponent} from './app.component';
-import {ActionService} from './services/action/action.service';
 import {AppRoutingModule} from './app-routing.module';
 
 
@@ -27,7 +26,6 @@ import {AppRoutingModule} from './app-routing.module';
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         DataService,
-        ActionService
     ],
     bootstrap: [AppComponent]
 })
