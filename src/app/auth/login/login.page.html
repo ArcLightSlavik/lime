@@ -19,8 +19,9 @@
                 <ion-button [disabled]="!loginForm.valid" expand="block" type="submit">Login</ion-button>
             </form>
             <ion-item class="ion-text-left" lines="none">
-                <ion-label (click)="navigateToForgotPassword()">Forgot Password</ion-label>
-                <ion-label (click)="navigateToRegister()">Register</ion-label>
+                <ion-label [routerLink]="['/auth/forgot-password']">Forgot Password</ion-label>
+                <ion-label [routerLink]="['/auth/register']">Register</ion-label>
             </ion-item>
+        </ion-card-content>
     </ion-card>
 </ion-content>
