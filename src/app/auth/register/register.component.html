@@ -7,23 +7,23 @@
             <ion-card-title class="ion-text-center">Register</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item-group>
-                <ion-item lines="full">
-                    <ion-input placeholder="Name"></ion-input>
-                </ion-item>
-                <ion-item lines="full">
-                    <ion-input placeholder="Email"></ion-input>
-                </ion-item>
-                <ion-item lines="full">
-                    <ion-input placeholder="Password"></ion-input>
-                </ion-item>
-                <ion-item lines="full">
-                    <ion-input placeholder="Confirm Password"></ion-input>
-                </ion-item>
-            </ion-item-group>
-            <ion-button expand="block">
-                Register
-            </ion-button>
+            <form (ngSubmit)="submitRegisterForm()" [formGroup]="registerForm">
+                <ion-item-group>
+                    <ion-item lines="full">
+                        <ion-input formControlName="name" placeholder="Name"></ion-input>
+                    </ion-item>
+                    <ion-item lines="full">
+                        <ion-input formControlName="email" placeholder="Email"></ion-input>
+                    </ion-item>
+                    <ion-item lines="full">
+                        <ion-input formControlName="password" placeholder="Password"></ion-input>
+                    </ion-item>
+                    <ion-item lines="full">
+                        <ion-input formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+                    </ion-item>
+                </ion-item-group>
+                <ion-button [disabled]="!registerForm.valid" expand="block" type="submit"> Register</ion-button>
+            </form>
             <ion-item class="ion-text-end" lines="none">
                 <ion-label (click)="navigateToLogin()">
                     Login

@@ -7,21 +7,20 @@
             Login
         </ion-card-header>
         <ion-card-content>
-            <ion-item-group>
-                <ion-item lines="full">
-                    <ion-input placeholder="Email"></ion-input>
-                </ion-item>
-                <ion-item lines="full">
-                    <ion-input placeholder="Password"></ion-input>
-                </ion-item>
-            </ion-item-group>
-            <ion-button expand="block">
-                Login
-            </ion-button>
-        </ion-card-content>
-        <ion-item class="ion-text-left" lines="none">
-            <ion-label (click)="navigateToForgotPassword()">Forgot Password</ion-label>
-            <ion-label (click)="navigateToRegister()">Register</ion-label>
-        </ion-item>
+            <form (ngSubmit)="submitLoginFrom()" [formGroup]="loginForm">
+                <ion-item-group>
+                    <ion-item lines="full">
+                        <ion-input formControlName="email" placeholder="Email"></ion-input>
+                    </ion-item>
+                    <ion-item lines="full">
+                        <ion-input formControlName="password" placeholder="Password"></ion-input>
+                    </ion-item>
+                </ion-item-group>
+                <ion-button [disabled]="!loginForm.valid" expand="block" type="submit">Login</ion-button>
+            </form>
+            <ion-item class="ion-text-left" lines="none">
+                <ion-label (click)="navigateToForgotPassword()">Forgot Password</ion-label>
+                <ion-label (click)="navigateToRegister()">Register</ion-label>
+            </ion-item>
     </ion-card>
 </ion-content>
