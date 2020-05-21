@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 import {ModalController} from '@ionic/angular';
@@ -13,7 +13,7 @@ import {ExpenseInterface} from '../../../interface/expenseInterface';
     templateUrl: './add-expense.component.html',
     styleUrls: ['./add-expense.component.scss'],
 })
-export class AddExpenseComponent implements OnInit {
+export class AddExpenseComponent {
     expenseTypes: any;
     addExpenseForm = new FormGroup({
         amount: new FormControl('', Validators.required),
@@ -27,9 +27,6 @@ export class AddExpenseComponent implements OnInit {
         private dateTimeService: DatetimeService
     ) {
         this.expenseTypes = ExpenseTypes;
-    }
-
-    ngOnInit() {
     }
 
     initCreateExpense(): void {

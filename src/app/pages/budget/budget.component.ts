@@ -1,16 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'app-budget',
     templateUrl: './budget.component.html',
     styleUrls: ['./budget.component.scss'],
 })
-export class BudgetComponent implements OnInit {
+export class BudgetComponent {
 
     constructor() {
     }
-
-    ngOnInit() {
-    }
-
 }
