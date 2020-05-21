@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {Platform} from '@ionic/angular';
-import {Plugins} from '@capacitor/core';
+import {Capacitor, Plugins} from '@capacitor/core';
 
 import {StorageService} from './services/storage/storage.service';
 import {StorageKeys} from './constants/constants';
@@ -26,7 +26,9 @@ export class AppComponent {
     async initializeApp(): Promise<void> {
         return await this.platform.ready().then(() => {
             Plugins.SplashScreen.hide();
-            Plugins.StatusBar.show();
+            if (Capacitor.isPluginAvailable('StatusBar')) {
+                Plugins.StatusBar.show();
+            }
         });
     }
 
