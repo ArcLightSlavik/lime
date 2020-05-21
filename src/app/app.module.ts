@@ -30,7 +30,9 @@ import {environment} from '../environments/environment';
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         DataService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {
 }

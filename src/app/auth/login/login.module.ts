@@ -14,7 +14,9 @@ import {LimeFormsModule} from '../../utils/modules/lime-forms.module';
         LimeFormsModule,
         LoginPageRoutingModule
     ],
-    declarations: [LoginPage]
+    declarations: [
+        LoginPage
+    ]
 })
 export class LoginPageModule {
 }

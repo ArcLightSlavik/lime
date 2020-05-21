@@ -6,7 +6,9 @@ import {IonicModule} from '@ionic/angular';
 import {ActivityComponent} from './activity.component';
 
 @NgModule({
-    declarations: [ActivityComponent],
+    declarations: [
+        ActivityComponent
+    ],
     imports: [
         CommonModule,
         IonicModule,

@@ -23,7 +23,9 @@ import {DashboardModule} from '../pages/dashboard/dashboard.module';
         ActivityModule,
         BudgetModule,
     ],
-    declarations: [TabsPage]
+    declarations: [
+        TabsPage
+    ]
 })
 export class TabsPageModule {
 }

@@ -6,7 +6,9 @@ import {IonicModule} from '@ionic/angular';
 import {AddExpenseComponent} from './components/add-expense/add-expense.component';
 
 @NgModule({
-    declarations: [AddExpenseComponent],
+    declarations: [
+        AddExpenseComponent
+    ],
     imports: [
         CommonModule,
         IonicModule,

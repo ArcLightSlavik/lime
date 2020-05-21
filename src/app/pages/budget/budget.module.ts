@@ -7,7 +7,9 @@ import {BudgetComponent} from './budget.component';
 
 
 @NgModule({
-    declarations: [BudgetComponent],
+    declarations: [
+        BudgetComponent
+    ],
     imports: [
         CommonModule,
         IonicModule,
