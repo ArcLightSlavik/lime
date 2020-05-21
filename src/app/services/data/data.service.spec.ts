@@ -30,9 +30,6 @@ describe('DataService', () => {
 
         const service: DataService = TestBed.get(DataService);
         const actualTotal = service.calculateTotalSelected(mockExpenses);
-        console.log(actualTotal);
-        console.log(expectedTotal);
         expect(actualTotal).toEqual(expectedTotal);
-
     });
 });

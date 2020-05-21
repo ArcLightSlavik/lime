@@ -9,7 +9,7 @@ import {AuthService} from '../services/auth/auth.service';
 })
 export class RegisterComponent {
 
-    private registrationForm: FormGroup = new FormGroup({
+    registrationForm: FormGroup = new FormGroup({
         name: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('', [Validators.min(8), Validators.required]),
@@ -27,7 +27,6 @@ export class RegisterComponent {
             this.registrationForm.value.password
         ).subscribe({
             next: () => {
-                console.log('res');
             }
         });
     }

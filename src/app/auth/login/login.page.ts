@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 import {AuthService} from '../services/auth/auth.service';
 
 @Component({
@@ -9,8 +10,8 @@ import {AuthService} from '../services/auth/auth.service';
 })
 export class LoginPage implements OnInit {
 
-    private showPassword = false;
-    private loginForm: FormGroup = new FormGroup({
+    showPassword = false;
+    loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, Validators.min(8)])
     });

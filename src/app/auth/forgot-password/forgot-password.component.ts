@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ForgotPasswordComponent {
 
-    private forgotPasswordForm: FormGroup = new FormGroup({
+    forgotPasswordForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email])
     });
 
@@ -16,6 +16,5 @@ export class ForgotPasswordComponent {
     }
 
     submitForgotPasswordForm(): void {
-        console.log('Password reset request');
     }
 }
