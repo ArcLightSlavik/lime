@@ -59,7 +59,7 @@ export class StorageService {
 
     async clearLocalStorage(isReset?: boolean): Promise<void> {
         if (isReset) {
-            this.dataService.setExpenses([]);
+            await this.dataService.setExpenses([]);
         }
         return await Plugins.Storage.clear();
     }

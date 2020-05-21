@@ -22,10 +22,6 @@ export class DataService {
         return this.totalExpenseForSelectedDay.next(total);
     }
 
-    async getExpenses(): Promise<ExpenseInterface[]> {
-        return this.expenses.getValue();
-    }
-
     async setExpenses(expenses: ExpenseInterface[]): Promise<void> {
         if (expenses) {
             this.setTodayTotalExpenses(this.calculateTotalSelected(expenses));
