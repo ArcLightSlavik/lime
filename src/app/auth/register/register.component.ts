@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../services/auth/auth.service';
 
 @Component({
     selector: 'app-register',
@@ -15,10 +16,19 @@ export class RegisterComponent {
         confirmPassword: new FormControl('', [Validators.min(8), Validators.required])
     });
 
-    constructor() {
+    constructor(
+        private authService: AuthService
+    ) {
     }
 
     submitRegisterForm(): void {
-        console.log('Register user request');
+        this.authService.registerWithEmailAndPassword(
+            this.registrationForm.value.email,
+            this.registrationForm.value.password
+        ).subscribe({
+            next: () => {
+                console.log('res');
+            }
+        });
     }
 }

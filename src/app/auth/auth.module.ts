@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
+import {AuthService} from './services/auth/auth.service';
 import {AuthRoutingModule} from './auth-routing.module';
 import {LimeFormsModule} from '../utils/modules/lime-forms.module';
 
@@ -10,7 +13,11 @@ import {LimeFormsModule} from '../utils/modules/lime-forms.module';
     imports: [
         CommonModule,
         AuthRoutingModule,
-        LimeFormsModule
+        LimeFormsModule,
+        AngularFireAuthModule
+    ],
+    providers: [
+        AuthService
     ]
 })
 export class AuthModule {
