@@ -6,23 +6,23 @@ import {BehaviorSubject} from 'rxjs';
     providedIn: 'root'
 })
 export class DatetimeService {
-    private _installDate: Date;
-    private _selectedDate: BehaviorSubject<Date>;
+    private appInstallDate: Date;
+    private readonly selectedDate: BehaviorSubject<Date>;
 
     constructor() {
-        this._selectedDate = new BehaviorSubject<Date>(this.getCurrentDateTime());
+        this.selectedDate = new BehaviorSubject<Date>(this.getCurrentDateTime());
     }
 
     async setSelectedDate(date: Date | string): Promise<void> {
-        return this._selectedDate.next(typeof date === 'string' ? this.createDateFromString(date) : date);
+        return this.selectedDate.next(typeof date === 'string' ? this.createDateFromString(date) : date);
     }
 
     async getSelectedDate(): Promise<Date> {
-        return this._selectedDate.getValue();
+        return this.selectedDate.getValue();
     }
 
     getSelectedDateSubscription(): BehaviorSubject<Date> {
-        return this._selectedDate;
+        return this.selectedDate;
     }
 
     getCurrentDateTime(): Date {
@@ -38,10 +38,10 @@ export class DatetimeService {
     }
 
     get installDate(): Date {
-        return this._installDate;
+        return this.appInstallDate;
     }
 
     set installDate(value: Date) {
-        this._installDate = value;
+        this.appInstallDate = value;
     }
 }
