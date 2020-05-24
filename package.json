@@ -15,7 +15,7 @@
     "run:ios": "ionic capacitor run ios",
     "run:android": "ionic capacitor run android",
     "live:ios": "ionic capacitor run ios --livereload --external",
-    "live:android": "ionic capacitor run android --livereaload --external"
+    "live:android": "ionic capacitor run android --livereload --external"
   },
   "private": true,
   "dependencies": {
