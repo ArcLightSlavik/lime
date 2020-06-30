@@ -6,7 +6,4 @@ import {Component} from '@angular/core';
     styleUrls: ['./activity.component.scss'],
 })
 export class ActivityComponent {
-
-    constructor() {
-    }
 }
